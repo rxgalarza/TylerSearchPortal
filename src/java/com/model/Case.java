@@ -58,5 +58,9 @@ public class Case implements Serializable{
         this.ticketDate = ticketDate;
     }
     
+    public String toString(){
+        String str = "Empty";
+       return str;
+    }
     
 }

@@ -38,16 +38,31 @@ public class MainController implements Serializable {
     }
     
     
-
     public List<Case> getList() {
         list = query.listCase(name);
+
         return list;
     }
+    
+   /** public List<Case> getList() {
+list = query.listCase(name);
+if(list.size()==0){
+Case temp = new Case();
+temp.setNameLast("error");
+temp.setNameFirst("error");
+temp.setPartyID("error");
+temp.setCitationNumber("error");
+temp.setTicketDate("error");
+list.add(temp);
+}
+return list;
+}
+**/
 
     public void setList(List<Case> list) {
         this.list = list;
     }
     
-    
+
     
 }

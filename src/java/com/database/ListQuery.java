@@ -25,6 +25,7 @@ public class ListQuery extends DBConnection implements Serializable{
             ps = (PreparedStatement) connect().prepareStatement("select * from test1 where match('"+ query + "')");
             Case c;
             rs = ps.executeQuery();
+           
             while(rs.next()){
                 c = new Case();
                 c.setNameFirst(rs.getString("nameFirst"));
@@ -33,11 +34,13 @@ public class ListQuery extends DBConnection implements Serializable{
                 c.setPartyID(rs.getString("PartyID"));
                 c.setTicketDate("TicketDate");
                 list.add(c);
-                
-                
+          
             }
             return list;
+             
+             
         }catch(Exception e){
+            
             return null;
         }
     }
