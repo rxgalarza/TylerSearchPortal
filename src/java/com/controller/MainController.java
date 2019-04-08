@@ -37,11 +37,32 @@ public class MainController implements Serializable {
        
     }
     
+    public String toString()
+    {
+        
+        return "error.xhtml";
+    }
     
     public List<Case> getList() {
         list = query.listCase(name);
-
-        return list;
+    try {
+    if (list.isEmpty())//list == 0
+    {
+        //return "error.xhtml";
+        Case temp = new Case();
+        temp.setNameLast("Not Found");
+        temp.setNameFirst("Not Found");
+        temp.setPartyID("Not Found");
+        temp.setCitationNumber("Not Found");
+        temp.setTicketDate("Not Found");
+        list.add(temp);
+    }
+        }
+    catch(NullPointerException e)
+     {
+        System.out.print("NullPointerException Caught At MainController");
+     }
+        return list; //return the list
     }
     
    /** public List<Case> getList() {

@@ -34,7 +34,6 @@ public class ListQuery extends DBConnection implements Serializable{
                 c.setPartyID(rs.getString("PartyID"));
                 c.setTicketDate("TicketDate");
                 list.add(c);
-          
             }
             return list;
              
