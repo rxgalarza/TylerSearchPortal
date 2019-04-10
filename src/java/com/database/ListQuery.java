@@ -32,9 +32,42 @@ public class ListQuery extends DBConnection implements Serializable{
                 c.setNameLast(rs.getString("nameLast"));
                 c.setCitationNumber(rs.getString("CitationNumber"));
                 c.setPartyID(rs.getString("PartyID"));
-                c.setTicketDate("TicketDate");
+                c.setTicketDate(rs.getString("ticketDate"));
                 list.add(c);
             }
+            ps=null;
+            rs=null;
+            return list;
+             
+             
+        }catch(Exception e){
+            
+            return null;
+        }
+    }
+    
+    
+     public List<Case> listCase2(String nameFirst, String nameLast){
+        List<Case> list = new ArrayList<Case>();
+        try{
+          //  ps = (PreparedStatement) connect().prepareStatement("select * from "
+                 //   + "test1 where nameFirst match ('James') and nameLast match('Adams')");
+           
+               ps = (PreparedStatement) connect().prepareStatement("select * from test1 where match('"+ nameLast + "')");
+                 Case c;
+            rs = ps.executeQuery();
+           
+            while(rs.next()){
+                c = new Case();
+                c.setNameFirst(rs.getString("nameFirst"));
+                c.setNameLast(rs.getString("nameLast"));
+                c.setCitationNumber(rs.getString("CitationNumber"));
+                c.setPartyID(rs.getString("PartyID"));
+                c.setTicketDate(rs.getString("ticketDate"));
+                list.add(c);
+            }
+            ps=null;
+            rs=null;
             return list;
              
              

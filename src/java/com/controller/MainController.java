@@ -8,6 +8,8 @@ import com.database.ListQuery;
 import com.model.Case;
 
 import java.io.Serializable;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -25,7 +27,42 @@ public class MainController implements Serializable {
     ListQuery query = new ListQuery();
     
     private List<Case> list = new ArrayList<Case>();
+   
+    
     private String name = "";
+     private String nameFirst = "";
+      private String nameLast = "";
+
+    
+    public String getNameFirst() {
+        return nameFirst;
+    }
+
+    public void setNameFirst(String nameFirst) {
+        this.nameFirst = nameFirst;
+    }
+
+    public String getNameLast() {
+        return nameLast;
+    }
+
+    public void setNameLast(String nameLast) {
+        this.nameLast = nameLast;
+    }
+      
+
+    long timeElapsed = 0;
+
+
+    
+
+    public long getTimeElapsed() {
+        return timeElapsed;
+    }
+
+    public void setTimeElapsed(long timeElapsed) {
+        this.timeElapsed = timeElapsed;
+    }
     
     public String getName() {
         return name;
@@ -44,8 +81,23 @@ public class MainController implements Serializable {
     }
     
     public List<Case> getList() {
-        list = query.listCase(name);
+        
+        if (nameFirst.equals("")&& nameLast.equals("")){
+            long startTime = System.nanoTime();      
+            list = query.listCase(name);
+            long endTime = System.nanoTime();    
+            timeElapsed = endTime - startTime;
+        }
+        else{
+            long startTime = System.nanoTime();       
+            list = query.listCase2(nameFirst,nameLast);
+            long endTime = System.nanoTime();
+            timeElapsed = endTime - startTime;
+            nameFirst = "";
+            nameLast="";
+        }      
     try {
+        
     if (list.isEmpty())//list == 0
     {
         //return "error.xhtml";
@@ -65,21 +117,7 @@ public class MainController implements Serializable {
         return list; //return the list
     }
     
-   /** public List<Case> getList() {
-list = query.listCase(name);
-if(list.size()==0){
-Case temp = new Case();
-temp.setNameLast("error");
-temp.setNameFirst("error");
-temp.setPartyID("error");
-temp.setCitationNumber("error");
-temp.setTicketDate("error");
-list.add(temp);
-}
-return list;
-}
-**/
-
+ 
     public void setList(List<Case> list) {
         this.list = list;
     }

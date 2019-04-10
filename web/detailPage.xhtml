@@ -14,15 +14,16 @@
                 
                 <h3>Detail Information </h3>
                 <h:form>
-                    <h:dataTable styleClass="movies" value="#{main.list}" var="c" border="1"
-                                 cellpadding="10" cellspacing="0" bgcolor="D3D3D3" >
-                    <h:column>
-                      <f:facet name="header">
-                        <h:outputText value="First Name"/>
-                      </f:facet>
-                      <h:outputText value="#{c.nameFirst}"/>
-                    </h:column>
-                    <h:column>
+                 <!---   <h:dataTable styleClass="movies" value="#{main.list}" var="c" border="1"
+                                 cellpadding="10" cellspacing="0" bgcolor="D3D3D3" > -->
+                      <!---   <h:column> -->
+                       <!---    <f:facet name="header"> -->
+                            <h:outputText value="First Name"/> 
+                     <!---      </f:facet> -->
+                      <h:outputText value="#{main.name}"/>
+                    <!---     </h:column> -->
+                  
+                      <!---   <h:column>
                       <f:facet name="header">
                         <h:outputText value="Last Name"/>
                       </f:facet>
@@ -44,9 +45,9 @@
                     
                          
                     </h:column>
-                   
+                   -->
                      
-                    </h:dataTable>
+                   <!---      </h:dataTable> -->
                      <h:commandButton value="Back"                                  
                                       action="index.xhtml" style=""/> 
            

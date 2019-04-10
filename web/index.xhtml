@@ -27,6 +27,7 @@
         <div class="content">
             <f:view>
                 <h3>Results for #{main.name} </h3>
+                
                 <h:form>
                     <h:dataTable styleClass="cases" value="#{main.list}" var="c">
                     <h:column>
@@ -59,6 +60,9 @@
                                      action="detailPage.xhtml"/> 
                     </h:column>
                     </h:dataTable>
+                    <h3> Time in nanosecond: </h3>
+                    <h3>#{main.timeElapsed}</h3>
+                    
                     <h:commandButton value="Back"                                  
                                      action="searchPage.xhtml"/> 
                     
