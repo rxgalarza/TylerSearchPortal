@@ -26,8 +26,7 @@
     <h:body>
         <div class="content">
             <f:view>
-                <h3>Results for #{main.name} </h3>
-                
+                              
                 <h:form>
                     <h:dataTable styleClass="cases" value="#{main.list}" var="c">
                     <h:column>
@@ -51,9 +50,15 @@
                     </h:column>
                     <h:column>
                       <f:facet name="header">
-                        <h:outputText value="Date"/>
+                        <h:outputText value="Ticket Date"/>
                       </f:facet>
                       <h:outputText value="#{c.ticketDate}"/>
+                    </h:column>
+                        <h:column>
+                      <f:facet name="header">
+                        <h:outputText value="Due Date"/>
+                      </f:facet>
+                      <h:outputText value="#{c.appearByDate}"/>
                     </h:column>
                     <h:column>
                       <h:commandButton value="More"                                  
@@ -64,8 +69,16 @@
                     <h3>#{main.timeElapsed}</h3>
                     
                     <h:commandButton value="Back"                                  
-                                     action="searchPage.xhtml"/> 
-                    
+                                     action="searchPage.xhtml"/>     
+                </h:form>
+                <h:form>
+                    <h3>Filter By: </h3>
+                    Start Date: <h:inputText  maxlength="15"  value="#{main.startDate}" > 
+                   
+                    </h:inputText>
+                     End Date: <h:inputText maxlength="15" value="#{main.endDate}">
+                    </h:inputText>
+                    <h:commandButton value="Search" action= "postSearchIndex.xhtml" />
                 </h:form>
             </f:view>
         </div>

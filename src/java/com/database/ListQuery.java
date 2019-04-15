@@ -22,9 +22,11 @@ public class ListQuery extends DBConnection implements Serializable{
     public List<Case> listCase(String query){
         List<Case> list = new ArrayList<Case>();
         try{
-            ps = (PreparedStatement) connect().prepareStatement("select * from test1 where match('"+ query + "')");
+            ps = (PreparedStatement) connect().prepareStatement("select * from test1 where "
+                    + "match('"+ query + "')");
             Case c;
             rs = ps.executeQuery();
+            int i = 0;
            
             while(rs.next()){
                 c = new Case();
@@ -33,13 +35,14 @@ public class ListQuery extends DBConnection implements Serializable{
                 c.setCitationNumber(rs.getString("CitationNumber"));
                 c.setPartyID(rs.getString("PartyID"));
                 c.setTicketDate(rs.getString("ticketDate"));
+                c.setAppearByDate(rs.getString("AppearDate"));
+                c.setIndex(i);
+                i++;
                 list.add(c);
             }
-            ps=null;
-            rs=null;
+            
             return list;
-             
-             
+                   
         }catch(Exception e){
             
             return null;
@@ -50,10 +53,12 @@ public class ListQuery extends DBConnection implements Serializable{
      public List<Case> listCase2(String nameFirst, String nameLast){
         List<Case> list = new ArrayList<Case>();
         try{
-          //  ps = (PreparedStatement) connect().prepareStatement("select * from "
-                 //   + "test1 where nameFirst match ('James') and nameLast match('Adams')");
+         //   ps = (PreparedStatement) connect().prepareStatement("select * from "
+          //         + "test1 where NameFirst match ('"+ NameFirst + "') and NameLast match ('" + NameLast + "')");
            
-               ps = (PreparedStatement) connect().prepareStatement("select * from test1 where match('"+ nameLast + "')");
+   ps = (PreparedStatement) connect().prepareStatement("select * from test1 where nameFirst= ('"+nameFirst+"') and nameLast = ('"+nameLast+"')");
+          
+             //  ps = (PreparedStatement) connect().prepareStatement("select * from test1 where match('')");
                  Case c;
             rs = ps.executeQuery();
            

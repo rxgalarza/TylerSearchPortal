@@ -17,6 +17,9 @@ public class Case implements Serializable{
     private String PartyID;
     private String citationNumber;
     private String ticketDate;
+     private String BusinessName;
+    private String appearByDate;
+    private int   index;
     
     public String getNameLast() {
         return nameLast;
@@ -58,9 +61,29 @@ public class Case implements Serializable{
         this.ticketDate = ticketDate;
     }
     
-    public String toString(){
-        String str = "Empty";
-       return str;
+     public String getBusinessName() {
+        return BusinessName;
     }
+
+    public void setBusinessName(String BusinessName) {
+        this.BusinessName = BusinessName;
+    }
+
+    public String getAppearByDate() {
+        return appearByDate;
+    }
+
+    public void setAppearByDate(String appearByDate) {
+        this.appearByDate = appearByDate;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+    
     
 }

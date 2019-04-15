@@ -19,21 +19,77 @@ import javax.faces.bean.SessionScoped;
  *
  * @author Rodolfo
  */
-
 @ManagedBean(name = "main")
 @SessionScoped
 public class MainController implements Serializable {
-   // private Case c = new Case();
+    private Case c = new Case();
     ListQuery query = new ListQuery();
     
     private List<Case> list = new ArrayList<Case>();
    
     
     private String name = "";
-     private String nameFirst = "";
-      private String nameLast = "";
+    private String nameFirst = "";
+    private String nameLast = "";
+    private int curr = 0;
+    public  String Date = "";
+    public String startDate = "";
+    public String endDate = "";
+    public  List<Case> sortedByDate = new ArrayList<Case>();
 
+    public List<Case> getSortedByDate() {
+       // try{
+        sortedByDate.clear();
+        String [] dateParts = startDate.split("/");
+        int monthStart = Integer.parseInt(dateParts[0]);
+        int dayStart = Integer.parseInt(dateParts[1]);
+        int yearStart = Integer.parseInt(dateParts[2]);
+        
+        String [] dateParts2 = endDate.split("/");
+        int monthEnd   = Integer.parseInt(dateParts2[0]);
+        int dayEnd = Integer.parseInt(dateParts2[1]);
+        int yearEnd  = Integer.parseInt(dateParts2[2]);
+        
+        
+        for(int i = 0 ; i < list.size() ; i++){
+           String caseAppearByDate =  list.get(i).getAppearByDate();
+           String [] dateParts3 = caseAppearByDate.split("/");
+           int caseMonth   = Integer.parseInt(dateParts3[0]);
+           int caseDay = Integer.parseInt(dateParts3[1]);
+           int caseYear  = Integer.parseInt(dateParts3[2]);
+           
+           if (caseYear >= yearStart && caseYear <= yearEnd){
+               if(caseMonth >= monthStart && caseMonth <= monthEnd){
+                   if(caseDay >= dayStart && caseDay <= dayEnd){
+                   sortedByDate.add(list.get(i));
+                   System.out.print(list.get(i).getAppearByDate());
+                   }
+               }
+           }
+        //}
+           
+        }
+      //  catch(NullPointerException e)
+    // {
+      //  System.out.print("NullPointerException Caught At MainController");
+   //  }
+        
+        return sortedByDate;
+    }
+
+     public void setSortedByDate(List<Case> sortedByDate) {
+        this.sortedByDate = sortedByDate;
+    }
     
+    public int getCurr() {
+        return curr;
+    }
+
+    public void setCurr(int curr) {
+        this.curr = curr;
+    }
+    
+   
     public String getNameFirst() {
         return nameFirst;
     }
@@ -52,10 +108,7 @@ public class MainController implements Serializable {
       
 
     long timeElapsed = 0;
-
-
     
-
     public long getTimeElapsed() {
         return timeElapsed;
     }
@@ -68,34 +121,33 @@ public class MainController implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        
-        this.name = name;
-       
+    public void setName(String name) {    
+        this.name = name;  
     }
     
-    public String toString()
-    {
-        
-        return "error.xhtml";
-    }
-    
+
     public List<Case> getList() {
         
-        if (nameFirst.equals("")&& nameLast.equals("")){
-            long startTime = System.nanoTime();      
+       // if (isName==false){
+            long startTime = System.nanoTime();     
             list = query.listCase(name);
             long endTime = System.nanoTime();    
             timeElapsed = endTime - startTime;
-        }
-        else{
+         /**   nameFirst = "";
+            nameLast="";
+       }
+        else
+        {
             long startTime = System.nanoTime();       
             list = query.listCase2(nameFirst,nameLast);
+           list = query.listCase(name);
             long endTime = System.nanoTime();
             timeElapsed = endTime - startTime;
             nameFirst = "";
             nameLast="";
         }      
+         return list;}
+    **/
     try {
         
     if (list.isEmpty())//list == 0
@@ -116,12 +168,36 @@ public class MainController implements Serializable {
      }
         return list; //return the list
     }
-    
+  
  
     public void setList(List<Case> list) {
         this.list = list;
     }
+       
     
+     public String getDate() {
+        return Date;
+    }
+    
+      public void setDate(String Date) {
+        this.Date = Date;
+    }
+      
+     public String getStartDate() {
+        return startDate;
+    }
+
+     public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
     
 }
