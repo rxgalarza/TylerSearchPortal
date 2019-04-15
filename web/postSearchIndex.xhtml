@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Result List</title>
+        <style type="text/css">
+         .content{
+                 color:#1f3877;
+                 text-align: center;
+                 text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+                }
+         table.cases{
+             margin:auto;
+             border: 5px solid ;
+         }
+          body{
+                  background-size: cover;
+                  background-position: center;                
+              }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="content">
+            <f:view>
+                <h3>Results for #{main.name} </h3>
+                <h:form>
+                    <h:dataTable styleClass="cases" value="#{main.sortedByDate}" var="x">
+                    <h:column>
+                      <f:facet name="header">
+                        <h:outputText value="First Name"/>
+                      </f:facet>
+                      <h:outputText value="#{x.nameFirst}"/>
+                    </h:column>
+                    <h:column>
+                      <f:facet name="header">
+                        <h:outputText value="Last Name"/>
+                      </f:facet>
+                      <h:outputText value="#{x.nameLast}"/>
+                    </h:column>
+                    <h:column>
+                      <f:facet name="header">
+                        <h:outputText value="Citation Number"/>
+                      </f:facet>
+                      <h:outputText value="#{x.citationNumber}"/>
+                    </h:column>
+                     <h:column>
+                      <f:facet name="header">
+                        <h:outputText value="Date"/>
+                      </f:facet>
+                      <h:outputText value="#{x.ticketDate}"/>
+                    </h:column>
+                    <h:column> 
+                      <f:facet name="header">
+                        <h:outputText value="Due Date"/>
+                      </f:facet>
+                      <h:outputText value="#{x.appearByDate}"/>
+                    </h:column>
+                    <h:column>
+                      
+                      <h:commandButton  value="More"                                  
+                                     action="detailPage.xhtml"/> 
+                    </h:column>
+                    </h:dataTable>
+                    <h:commandButton value="Back"                                  
+                                     action="index.xhtml"/> 
+             
+                </h:form>
+               
+            </f:view>
+        </div>
+
+    </h:body>
+</html>
+
+
