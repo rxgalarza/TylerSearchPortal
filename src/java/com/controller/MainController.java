@@ -36,6 +36,7 @@ public class MainController implements Serializable {
     public String startDate = "";
     public String endDate = "";
     public String citationNumber = "";
+    private Case Case;
     
     public  List<Case> sortedByDate = new ArrayList<Case>();
 
@@ -150,8 +151,24 @@ public class MainController implements Serializable {
     public void setCitationNumber(String citationNumber) {
         this.citationNumber = citationNumber;
     }
-    
 
+    public Case getCase() {
+        return Case;
+    }
+
+    public void setCase(Case Case) {
+        this.Case = Case;
+    }
+    
+    public String showCase(String citationNumber){
+        //this.citationNumber=citationNumber;
+        for(int i =0;i<list.size();i++){
+            if(list.get(i).getCitationNumber().equals(citationNumber)){
+                Case = list.get(i);
+            }
+        }
+        return "detailPage.xhtml";
+    }
     public List<Case> getList() {
         
        if (nameFirst.equals("")||nameLast.equals("")){
