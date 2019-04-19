@@ -9,9 +9,7 @@
          .content{
                  color:#1f3877;
                  text-align: center;
-                 text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
-                 0px 8px 13px rgba(0,0,0,0.1),
-                 0px 18px 23px rgba(0,0,0,0.1);
+                
                 }
          table.cases{
              margin:auto;
@@ -65,8 +63,11 @@
                                      action="detailPage.xhtml"/> 
                     </h:column>
                     </h:dataTable>
-                    <h3> Time in nanosecond: </h3>
-                    <h3>#{main.timeElapsed}</h3>
+                    <h1 style="color:red"> #{main.error} </h1>
+                    <h3> Number of matches:  #{main.size} </h3>
+                   
+                    <h3> Time in nanosecond: #{main.timeElapsed} </h3>
+                    
                     
                     <h:commandButton value="Back"                                  
                                      action="searchPage.xhtml"/>     

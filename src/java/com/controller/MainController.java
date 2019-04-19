@@ -26,8 +26,8 @@ public class MainController implements Serializable {
     ListQuery query = new ListQuery();
     
     private List<Case> list = new ArrayList<Case>();
-   
-    
+    private String error="";
+    private int size = 0;
     private String name = "";
     private String nameFirst = "";
     private String nameLast = "";
@@ -35,6 +35,8 @@ public class MainController implements Serializable {
     public  String Date = "";
     public String startDate = "";
     public String endDate = "";
+    public String citationNumber = "";
+    
     public  List<Case> sortedByDate = new ArrayList<Case>();
 
     public List<Case> getSortedByDate() {
@@ -77,7 +79,15 @@ public class MainController implements Serializable {
         return sortedByDate;
     }
 
-     public void setSortedByDate(List<Case> sortedByDate) {
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public void setSortedByDate(List<Case> sortedByDate) {
         this.sortedByDate = sortedByDate;
     }
     
@@ -124,51 +134,63 @@ public class MainController implements Serializable {
     public void setName(String name) {    
         this.name = name;  
     }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getCitationNumber() {
+        return citationNumber;
+    }
+
+    public void setCitationNumber(String citationNumber) {
+        this.citationNumber = citationNumber;
+    }
     
 
     public List<Case> getList() {
         
-       // if (isName==false){
-            long startTime = System.nanoTime();     
+       if (nameFirst.equals("")||nameLast.equals("")){
+          long startTime = System.nanoTime();     
             list = query.listCase(name);
             long endTime = System.nanoTime();    
             timeElapsed = endTime - startTime;
-         /**   nameFirst = "";
-            nameLast="";
-       }
-        else
-        {
-            long startTime = System.nanoTime();       
-            list = query.listCase2(nameFirst,nameLast);
-           list = query.listCase(name);
-            long endTime = System.nanoTime();
-            timeElapsed = endTime - startTime;
             nameFirst = "";
             nameLast="";
-        }      
-         return list;}
-    **/
-    try {
-        
-    if (list.isEmpty())//list == 0
-    {
-        //return "error.xhtml";
-        Case temp = new Case();
-        temp.setNameLast("Not Found");
-        temp.setNameFirst("Not Found");
-        temp.setPartyID("Not Found");
-        temp.setCitationNumber("Not Found");
-        temp.setTicketDate("Not Found");
-        list.add(temp);
-    }
+       }
+       //else if(citationNumber.equals("")){
+           
+           
+       //}
+        else
+        {
+            long startTime = System.nanoTime();          
+            list = query.listCase2(nameFirst,nameLast);    
+            long endTime = System.nanoTime();
+            timeElapsed = endTime - startTime;
+          //  nameFirst = "";
+         //  nameLast="";
+        }    
+       
+        try {    
+            error="";
+        size = list.size();
+            if (list.isEmpty())//list == 0
+            {
+                error="No results found";
+            }
         }
-    catch(NullPointerException e)
-     {
-        System.out.print("NullPointerException Caught At MainController");
-     }
+        catch(NullPointerException e)
+        {
+            System.out.print("NullPointerException Caught At MainController");
+        }
         return list; //return the list
     }
-  
+
  
     public void setList(List<Case> list) {
         this.list = list;

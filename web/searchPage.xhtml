@@ -25,11 +25,11 @@ and open the template in the editor.
             </div>
             <div class="tabPanel">
                 <h:form>
-                    First Name: <h:inputText maxlength="10" value="#{main.name}">
+                    First Name: <h:inputText maxlength="10" value="#{main.nameFirst}">
                             <f:validateRegex pattern="[a-zA-Z]{2,}"/>  
                         
                     </h:inputText>
-                    Last Name: <h:inputText  maxlength="10" value="#{main.name}">
+                    Last Name: <h:inputText  maxlength="10" value="#{main.nameLast}">
                             <f:validateRegex pattern="[a-zA-Z]{2,}"/>  
                        
                     </h:inputText>
@@ -57,7 +57,7 @@ and open the template in the editor.
                     Case Number: <h:inputText maxlength="15" value="#{main.name}">
                      <f:validateRegex pattern="[a-zA-Z]+[0-9]{1,}" />         
                     </h:inputText>
-                <h:commandButton value="Search" action="index.xhtml" />
+               <h:commandButton value="Search" action="index.xhtml" />
                 </h:form>
             </div>
         </div>
