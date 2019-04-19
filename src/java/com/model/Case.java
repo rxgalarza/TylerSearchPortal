@@ -19,7 +19,10 @@ public class Case implements Serializable{
     private String ticketDate;
      private String BusinessName;
     private String appearByDate;
+    private String caseNbr;
     private int   index;
+    private String filedDate;
+    
     
     public String getNameLast() {
         return nameLast;
@@ -83,6 +86,22 @@ public class Case implements Serializable{
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public String getCaseNbr() {
+        return caseNbr;
+    }
+
+    public void setCaseNbr(String caseNbr) {
+        this.caseNbr = caseNbr;
+    }
+
+    public String getFiledDate() {
+        return filedDate;
+    }
+
+    public void setFiledDate(String filedDate) {
+        this.filedDate = filedDate;
     }
     
     

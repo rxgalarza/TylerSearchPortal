@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Result List</title>
+        <style type="text/css">
+         .content{
+                 color:#1f3877;
+                 text-align: center;
+                
+                }
+         table.cases{
+             margin:auto;
+             border: 5px solid ;
+         }
+          body{
+                  background-size: cover;
+                  background-position: center;                
+              }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="content">
+            <f:view>
+                              
+                <h:form>
+                    <h:dataTable styleClass="cases" value="#{main.list}" var="c">
+                    
+                    <h:column>
+                      <f:facet name="header">
+                        <h:outputText value="Business Name"/>
+                      </f:facet>
+                      <h:outputText value="#{c.nameLast}"/>
+                    </h:column>
+                    
+                    <h:column>
+                      <f:facet name="header">
+                        <h:outputText value="Case Number"/>
+                      </f:facet>
+                      <h:outputText value="#{c.caseNbr}"/>
+                    </h:column>
+                        
+                        <h:column>
+                      <f:facet name="header">
+                        <h:outputText value="Filed Date"/>
+                      </f:facet>
+                      <h:outputText value="#{c.filedDate}"/>
+                    </h:column> 
+                        
+                 <!--  <h:column>
+                      <f:facet name="header">
+                        <h:outputText value="Party ID"/>
+                      </f:facet>
+                      <h:outputText value="#{c.PartyID}"/>
+                    </h:column> -->
+                        
+                    <h:column>
+                      <h:commandButton value="More"                                  
+                                     action="BusinessDetailPage.xhtml"/> 
+                    </h:column>
+                    </h:dataTable>
+                    <h1 style="color:red"> #{main.error} </h1>
+                    <h3> Number of matches:  #{main.size} </h3>
+                   
+                    <h3> Time in nanosecond: #{main.timeElapsed} </h3>
+                    
+                    
+                    <h:commandButton value="Back"                                  
+                                     action="searchPage.xhtml"/>     
+                </h:form>
+                <h:form>
+                    <h3>Filter By: </h3>
+                    Start Date: <h:inputText  maxlength="15"  value="#{main.startDate}" > 
+                   
+                    </h:inputText>
+                     End Date: <h:inputText maxlength="15" value="#{main.endDate}">
+                    </h:inputText>
+                    <h:commandButton value="Search" action= "BusinessPostSearchIndex.xhtml" />
+                </h:form>
+            </f:view>
+        </div>
+
+    </h:body>
+</html>
+

@@ -55,7 +55,7 @@ public class ListQuery extends DBConnection implements Serializable{
          //   ps = (PreparedStatement) connect().prepareStatement("select * from "
           //         + "test1 where NameFirst match ('"+ NameFirst + "') and NameLast match ('" + NameLast + "')");
            
-   ps = (PreparedStatement) connect().prepareStatement("select * from test1 where nameFirst= '"+nameFirst+"' and nameLast = '"+nameLast+"'");
+   ps = (PreparedStatement) connect().prepareStatement("select * from test2 where nameFirst= '"+nameFirst+"' and nameLast = '"+nameLast+"'");
           
              //  ps = (PreparedStatement) connect().prepareStatement("select * from test1 where match('')");
                  Case c;
@@ -82,5 +82,35 @@ public class ListQuery extends DBConnection implements Serializable{
         }
     }
      
+     public List<Case> listCase3(String businessName){
+        List<Case> list = new ArrayList<Case>();
+        try{
+         //   ps = (PreparedStatement) connect().prepareStatement("select * from "
+          //         + "test1 where NameFirst match ('"+ NameFirst + "') and NameLast match ('" + NameLast + "')");
+           
+   ps = (PreparedStatement) connect().prepareStatement("select * from test2 where nameLast = '"+businessName+"'");
+          
+             //  ps = (PreparedStatement) connect().prepareStatement("select * from test1 where match('')");
+                 Case c;
+                 rs = ps.executeQuery();
+           
+            while(rs.next()){
+                c = new Case();
+                c.setNameLast(rs.getString("nameLast"));
+                c.setCaseNbr(rs.getString("CaseNbr"));
+               c.setFiledDate(rs.getString("FiledDate"));
+               // c.setPartyID(rs.getString("PartyID"));
+                list.add(c);
+            }
+            ps=null;
+            rs=null;
+            return list;
+             
+             
+        }catch(Exception e){
+            
+            return null;
+        }
+    }
    
 }

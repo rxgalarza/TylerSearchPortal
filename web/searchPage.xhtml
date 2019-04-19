@@ -38,10 +38,10 @@ and open the template in the editor.
             </div>
             <div class="tabPanel">
                 <h:form>
-                    Business Name: <h:inputText maxlength="15" value="#{main.name}">
+                    Business Name: <h:inputText maxlength="15" value="#{main.businessName}">
                      <f:validateRegex pattern="[a-zA-Z]+[0-9]{1,}"/>   
                     </h:inputText>
-                <h:commandButton value="Search" action="index.xhtml"  />
+                <h:commandButton value="Search" action="businessIndex.xhtml"  />
                 </h:form>
             </div>
             <div class="tabPanel">

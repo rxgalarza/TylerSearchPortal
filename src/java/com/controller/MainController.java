@@ -36,6 +36,7 @@ public class MainController implements Serializable {
     public String startDate = "";
     public String endDate = "";
     public String citationNumber = "";
+    public String businessName = "";
     
     public  List<Case> sortedByDate = new ArrayList<Case>();
 
@@ -77,6 +78,49 @@ public class MainController implements Serializable {
    //  }
         
         return sortedByDate;
+    }
+    
+    
+      public  List<Case> sortedByFiledDate = new ArrayList<Case>();
+
+    public List<Case> getSortedByFiledDate() {
+       // try{
+        sortedByFiledDate.clear();
+        String [] dateParts = startDate.split("/");
+        int monthStart = Integer.parseInt(dateParts[0]);
+        int dayStart = Integer.parseInt(dateParts[1]);
+        int yearStart = Integer.parseInt(dateParts[2]);
+        
+        String [] dateParts2 = endDate.split("/");
+        int monthEnd   = Integer.parseInt(dateParts2[0]);
+        int dayEnd = Integer.parseInt(dateParts2[1]);
+        int yearEnd  = Integer.parseInt(dateParts2[2]);
+        
+        
+        for(int i = 0 ; i < list.size() ; i++){
+           String caseFiledDate =  list.get(i).getFiledDate();
+           String [] dateParts3 = caseFiledDate.split("/");
+           int caseMonth   = Integer.parseInt(dateParts3[0]);
+           int caseDay = Integer.parseInt(dateParts3[1]);
+           int caseYear  = Integer.parseInt(dateParts3[2]);
+           
+           if (caseYear >= yearStart && caseYear <= yearEnd){
+               if(caseMonth >= monthStart && caseMonth <= monthEnd){
+                   if(caseDay >= dayStart && caseDay <= dayEnd){
+                   sortedByFiledDate.add(list.get(i));
+                 
+                   }
+               }
+           }
+        //}
+           
+        }
+      //  catch(NullPointerException e)
+    // {
+      //  System.out.print("NullPointerException Caught At MainController");
+   //  }
+        
+        return sortedByFiledDate;
     }
 
     public int getSize() {
@@ -150,30 +194,42 @@ public class MainController implements Serializable {
     public void setCitationNumber(String citationNumber) {
         this.citationNumber = citationNumber;
     }
+
+    public String getBusinessName() {
+        return businessName;
+    }
+
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
+    }
     
 
     public List<Case> getList() {
         
-       if (nameFirst.equals("")||nameLast.equals("")){
-          long startTime = System.nanoTime();     
-            list = query.listCase(name);
-            long endTime = System.nanoTime();    
-            timeElapsed = endTime - startTime;
-            nameFirst = "";
-            nameLast="";
-       }
-       //else if(citationNumber.equals("")){
-           
-           
-       //}
-        else
-        {
-            long startTime = System.nanoTime();          
+       if (!nameFirst.equals("")&&!nameLast.equals("")){
+           long startTime = System.nanoTime();          
             list = query.listCase2(nameFirst,nameLast);    
             long endTime = System.nanoTime();
             timeElapsed = endTime - startTime;
           //  nameFirst = "";
          //  nameLast="";
+       }
+       else if(!businessName.equals("") ){
+           long startTime = System.nanoTime();          
+            list = query.listCase3(businessName);    
+            long endTime = System.nanoTime();
+            timeElapsed = endTime - startTime;
+           
+       }
+        else
+        {
+           
+            long startTime = System.nanoTime();     
+            list = query.listCase(name);
+            long endTime = System.nanoTime();    
+            timeElapsed = endTime - startTime;
+            nameFirst = "";
+            nameLast="";
         }    
        
         try {    
