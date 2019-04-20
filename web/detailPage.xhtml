@@ -14,42 +14,19 @@
                 
                 <h3>Detail Information </h3>
                 <h:form>
-                    <h:dataTable styleClass="movies" value="#{main.list}" var="c" border="1"
-                                 cellpadding="10" cellspacing="0" bgcolor="D3D3D3" > -->
-                         <h:column> 
-                           <f:facet name="header"> 
-                            <h:outputText value="First Name"/> 
-                           </f:facet> 
-                      <h:outputText value="#{c.nameFirst}"/>
-                       
-                         </h:column> 
-                  
-                        <h:column>
-                      <f:facet name="header">
-                        <h:outputText value="Last Name"/>
-                      </f:facet>
-                      <h:outputText value="#{c.nameLast}"/>
-                    </h:column>
-                   
-                        
-                    <h:column>
-                      <f:facet name="header">
-                        <h:outputText value="Citation Number"/>
-                      </f:facet>
-                      <h:outputText value="#{c.citationNumber}"/>
-                    </h:column>
-                    <h:column>
-                      <f:facet name="header">
-                        <h:outputText value="Date"/>
-                      </f:facet>
-                      <h:outputText value="#{c.ticketDate}"/>
-                    
-                         
-                    </h:column>
-                   
-                     
-                         </h:dataTable>
-                     <h:commandButton value="Back"                                  
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value = "First Name:"/>
+                        <h:outputText value = "#{main.case.nameFirst}"/>
+                        <h:outputLabel value = "Last Name:"/>
+                        <h:outputText value = "#{main.case.nameLast}"/>
+                        <h:outputLabel value = "Citation Number:"/>
+                        <h:outputText value = "#{main.case.citationNumber}"/>
+                        <h:outputLabel value = "Ticket Date:"/>
+                        <h:outputText value = "#{main.case.ticketDate}"/>
+                        <h:outputLabel value = "Due Date:"/>
+                        <h:outputText value = "#{main.case.appearByDate}"/>
+                    </h:panelGrid>
+                    <h:commandButton value="Back"                                  
                                       action="index.xhtml" style=""/> 
            
                      

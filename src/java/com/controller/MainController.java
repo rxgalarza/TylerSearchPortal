@@ -17,7 +17,7 @@ import javax.faces.bean.SessionScoped;
 
 /**
  *
- * @author Rodolfo
+ * @author Rodolfo and Zijia 
  */
 @ManagedBean(name = "main")
 @SessionScoped
@@ -37,7 +37,7 @@ public class MainController implements Serializable {
     public String endDate = "";
     public String citationNumber = "";
     public String businessName = "";
-    
+    private Case Case;
     public  List<Case> sortedByDate = new ArrayList<Case>();
 
     public List<Case> getSortedByDate() {
@@ -123,6 +123,14 @@ public class MainController implements Serializable {
         return sortedByFiledDate;
     }
 
+    public Case getCase() {
+        return Case;
+    }
+
+    public void setCase(Case Case) {
+        this.Case = Case;
+    }
+
     public int getSize() {
         return size;
     }
@@ -202,7 +210,14 @@ public class MainController implements Serializable {
     public void setBusinessName(String businessName) {
         this.businessName = businessName;
     }
-    
+    public String showCase(String citationNumber){
+        for(int i = 0;i<list.size();i++){
+            if(list.get(i).getCitationNumber().equals(citationNumber)){
+                Case = list.get(i);
+            }
+        }
+        return "detailPage.xhtml";
+    }
 
     public List<Case> getList() {
         
