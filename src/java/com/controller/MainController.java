@@ -218,16 +218,34 @@ public class MainController implements Serializable {
         }
         return "detailPage.xhtml";
     }
-
+    public String cleanAll(){
+        if(list!=null) list.clear();        
+        c = null;
+        error="";
+        size = 0;
+        name = "";
+        nameFirst = "";
+        nameLast = "";
+        curr = 0;
+        Date = "";
+        startDate = "";
+        endDate = "";
+        citationNumber = "";
+        businessName = "";
+    
+        sortedByDate.clear();
+        
+        return "searchPage.xhtml";
+    }
     public List<Case> getList() {
-     //try{   
+     
        if (!nameFirst.equals("")&&!nameLast.equals("")){
            // list.clear();
            long startTime = System.nanoTime();          
             list = query.listCase2(nameFirst,nameLast);    
             long endTime = System.nanoTime();
             timeElapsed = endTime - startTime;
-            
+   
             
        }
        else if(!businessName.equals("") ){
@@ -238,7 +256,7 @@ public class MainController implements Serializable {
             list = query.listCase3(businessName);    
             long endTime = System.nanoTime();
             timeElapsed = endTime - startTime;
-           
+
        }
         else
         {
@@ -263,7 +281,7 @@ public class MainController implements Serializable {
         {
             System.out.print("NullPointerException Caught At MainController");
         }
-        return list; //return the list
+        return list;
        
     }
 
