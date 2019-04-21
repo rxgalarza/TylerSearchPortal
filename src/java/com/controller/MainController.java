@@ -260,8 +260,19 @@ public class MainController implements Serializable {
      
        if (!nameFirst.equals("")&&!nameLast.equals("")){
            // list.clear();
-           long startTime = System.nanoTime();          
-            list = query.listCase2(nameFirst,nameLast);    
+           long startTime = System.nanoTime();      
+           if(nameLast.indexOf("*")!=-1){
+                
+                list = query.listCaseWildCard(nameFirst);
+            }
+           else if(nameFirst.indexOf("*")!=-1){
+               list = query.listCaseWildCard(nameLast);
+           }
+         
+           else{
+               list = query.listCase2(nameFirst,nameLast); 
+           }
+               
             long endTime = System.nanoTime();
             timeElapsed = endTime - startTime;
 
@@ -271,8 +282,14 @@ public class MainController implements Serializable {
            
              nameFirst = "";
            nameLast="";
-           long startTime = System.nanoTime();          
-            list = query.listCase3(businessName);    
+           long startTime = System.nanoTime(); 
+           if(businessName.indexOf("*")!=-1){
+                list = query.listCaseWildCard(businessName);
+            }
+           else{
+               list = query.listCase3(businessName);  
+           }
+              
             long endTime = System.nanoTime();
             timeElapsed = endTime - startTime;
 
@@ -280,8 +297,14 @@ public class MainController implements Serializable {
         else
         {
         
-            long startTime = System.nanoTime();     
-            list = query.listCase(name);
+            long startTime = System.nanoTime();
+            if(name.indexOf("*")!=-1){
+                list = query.listCaseWildCard(name);
+            }
+            else{
+                list = query.listCase(name);
+            }
+            
             long endTime = System.nanoTime();    
             timeElapsed = endTime - startTime;
    

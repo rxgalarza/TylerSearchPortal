@@ -26,11 +26,11 @@ and open the template in the editor.
             <div class="tabPanel">
                 <h:form>
                     First Name: <h:inputText maxlength="10" value="#{main.nameFirst}">
-                            <f:validateRegex pattern="[a-zA-Z]{2,}"/>  
+                            <f:validateRegex pattern="[a-zA-Z]{0,}+[*]{0,}"/>  
                         
                     </h:inputText>
                     Last Name: <h:inputText  maxlength="10" value="#{main.nameLast}">
-                            <f:validateRegex pattern="[a-zA-Z]{2,}"/>  
+                            <f:validateRegex pattern="[a-zA-Z]{0,}+[*]{0,}"/>  
                        
                     </h:inputText>
                 <h:commandButton value="Search" action="index.xhtml" />
@@ -39,7 +39,7 @@ and open the template in the editor.
             <div class="tabPanel">
                 <h:form>
                     Business Name: <h:inputText maxlength="15" value="#{main.businessName}">
-                     <f:validateRegex pattern="[a-zA-Z]+[0-9]{1,}"/>   
+                     <f:validateRegex pattern="[a-zA-Z]{1,}+[0-9]{0,}+[*]{0,}"/>   
                     </h:inputText>
                 <h:commandButton value="Search" action="businessIndex.xhtml"  />
                 </h:form>
@@ -47,7 +47,7 @@ and open the template in the editor.
             <div class="tabPanel">
                 <h:form>
                 Citation Number: <h:inputText maxlength="15" value="#{main.name}">
-                   <f:validateRegex pattern="[a-zA-Z]+[0-9]{1,}"  />  
+                   <f:validateRegex pattern="[a-zA-Z]{1,}+[0-9]{0,}+[*]{0,}"  />  
                     </h:inputText>
                 <h:commandButton value="Search" action="index.xhtml" />
                 </h:form>
@@ -55,7 +55,7 @@ and open the template in the editor.
             <div class="tabPanel">
                 <h:form>
                     Case Number: <h:inputText maxlength="15" value="#{main.name}">
-                     <f:validateRegex pattern="[a-zA-Z]+[0-9]{1,}" />         
+                     <f:validateRegex pattern="[a-zA-Z]{1,}+[0-9]{0,}+[*]{0,}" />         
                     </h:inputText>
                <h:commandButton value="Search" action="index.xhtml" />
                 </h:form>
