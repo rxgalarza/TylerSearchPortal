@@ -220,16 +220,20 @@ public class MainController implements Serializable {
     }
 
     public List<Case> getList() {
-        
+     //try{   
        if (!nameFirst.equals("")&&!nameLast.equals("")){
+           // list.clear();
            long startTime = System.nanoTime();          
             list = query.listCase2(nameFirst,nameLast);    
             long endTime = System.nanoTime();
             timeElapsed = endTime - startTime;
-          //  nameFirst = "";
-         //  nameLast="";
+            
+            
        }
        else if(!businessName.equals("") ){
+           
+             nameFirst = "";
+           nameLast="";
            long startTime = System.nanoTime();          
             list = query.listCase3(businessName);    
             long endTime = System.nanoTime();
@@ -238,17 +242,17 @@ public class MainController implements Serializable {
        }
         else
         {
-           
+        
             long startTime = System.nanoTime();     
             list = query.listCase(name);
             long endTime = System.nanoTime();    
             timeElapsed = endTime - startTime;
-            nameFirst = "";
-            nameLast="";
+           // name = "";
+             
         }    
        
         try {    
-            error="";
+        error="";
         size = list.size();
             if (list.isEmpty())//list == 0
             {
@@ -260,6 +264,7 @@ public class MainController implements Serializable {
             System.out.print("NullPointerException Caught At MainController");
         }
         return list; //return the list
+       
     }
 
  

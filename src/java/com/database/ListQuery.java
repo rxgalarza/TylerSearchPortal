@@ -21,6 +21,7 @@ public class ListQuery extends DBConnection implements Serializable{
     
     public List<Case> listCase(String query){
         List<Case> list = new ArrayList<Case>();
+        
         try{
             ps = (PreparedStatement) connect().prepareStatement("select * from test1 where CitationNumber = '"+ query + "'");
             Case c;
@@ -55,7 +56,7 @@ public class ListQuery extends DBConnection implements Serializable{
          //   ps = (PreparedStatement) connect().prepareStatement("select * from "
           //         + "test1 where NameFirst match ('"+ NameFirst + "') and NameLast match ('" + NameLast + "')");
            
-   ps = (PreparedStatement) connect().prepareStatement("select * from test2 where nameFirst= '"+nameFirst+"' and nameLast = '"+nameLast+"'");
+   ps = (PreparedStatement) connect().prepareStatement("select * from test1 where nameFirst= '"+nameFirst+"' and nameLast = '"+nameLast+"'");
           
              //  ps = (PreparedStatement) connect().prepareStatement("select * from test1 where match('')");
                  Case c;
@@ -80,10 +81,12 @@ public class ListQuery extends DBConnection implements Serializable{
             
             return null;
         }
+         
     }
      
      public List<Case> listCase3(String businessName){
         List<Case> list = new ArrayList<Case>();
+       
         try{
          //   ps = (PreparedStatement) connect().prepareStatement("select * from "
           //         + "test1 where NameFirst match ('"+ NameFirst + "') and NameLast match ('" + NameLast + "')");
