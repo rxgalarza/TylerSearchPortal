@@ -7,6 +7,10 @@
         <title>Detail Information</title>
        
     </h:head>
+   <h:head>
+        <title>Detail Information</title>
+       
+    </h:head>
     <h:body>
      
         <div >
@@ -14,35 +18,16 @@
                 
                 <h3>Detail Information </h3>
                 <h:form>
-                    <h:dataTable styleClass="movies" value="#{main.list}" var="c" border="1"
-                                 cellpadding="10" cellspacing="0" bgcolor="D3D3D3" > -->
-                         
-                  
-                        <h:column>
-                      <f:facet name="header">
-                        <h:outputText value="Business Name"/>
-                      </f:facet>
-                      <h:outputText value="#{c.nameLast}"/>
-                    </h:column>
-                   
-                        
-                    <h:column>
-                      <f:facet name="header">
-                        <h:outputText value="Case Number"/>
-                      </f:facet>
-                      <h:outputText value="#{c.caseNbr}"/>
-                    </h:column>
-                    <h:column>
-                      <f:facet name="header">
-                        <h:outputText value="Filed Date"/>
-                      </f:facet>
-                      <h:outputText value="#{c.filedDate}"/>
-                    </h:column> 
-                   
-                      
-                   
-                         </h:dataTable>
-                     <h:commandButton value="Back"                                  
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value = "Business Name:"/>
+                        <h:outputText value = "#{main.case.nameLast}"/>
+                        <h:outputLabel value = "Case Number:"/>
+                        <h:outputText value = "#{main.case.caseNbr}"/>
+                        <h:outputLabel value = "File Date:"/>
+                        <h:outputText value = "#{main.case.filedDate}"/>
+
+                    </h:panelGrid>
+                    <h:commandButton value="Back"                                  
                                       action="businessIndex.xhtml" style=""/> 
            
                      

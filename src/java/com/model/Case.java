@@ -22,6 +22,8 @@ public class Case implements Serializable{
     private String caseNbr;
     private int   index;
     private String filedDate;
+
+    
     
     
     public String getNameLast() {

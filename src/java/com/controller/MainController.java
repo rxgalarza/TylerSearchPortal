@@ -38,8 +38,11 @@ public class MainController implements Serializable {
     public String citationNumber = "";
     public String businessName = "";
     private Case Case;
+    private double seconds;
+    
     public  List<Case> sortedByDate = new ArrayList<Case>();
-
+    DecimalFormat twoDForm = new DecimalFormat("#.####");
+     
     public List<Case> getSortedByDate() {
        // try{
         sortedByDate.clear();
@@ -123,6 +126,14 @@ public class MainController implements Serializable {
         return sortedByFiledDate;
     }
 
+    public double getSeconds() {
+        return Double.valueOf(twoDForm.format(timeElapsed*0.000000001));
+    }
+
+    public void setSeconds(double seconds) {
+        this.seconds = seconds;
+    }
+    
     public Case getCase() {
         return Case;
     }
@@ -218,6 +229,14 @@ public class MainController implements Serializable {
         }
         return "detailPage.xhtml";
     }
+    public String showCase2(String caseNumber){
+        for(int i = 0;i<list.size();i++){
+            if(list.get(i).getCaseNbr().equals(caseNumber)){
+                Case = list.get(i);
+            }
+        }
+        return "BusinessDetailPage.xhtml";
+    }
     public String cleanAll(){
         if(list!=null) list.clear();        
         c = null;
@@ -232,7 +251,7 @@ public class MainController implements Serializable {
         endDate = "";
         citationNumber = "";
         businessName = "";
-    
+        Case = null;
         sortedByDate.clear();
         
         return "searchPage.xhtml";
@@ -245,7 +264,7 @@ public class MainController implements Serializable {
             list = query.listCase2(nameFirst,nameLast);    
             long endTime = System.nanoTime();
             timeElapsed = endTime - startTime;
-   
+
             
        }
        else if(!businessName.equals("") ){
@@ -265,8 +284,7 @@ public class MainController implements Serializable {
             list = query.listCase(name);
             long endTime = System.nanoTime();    
             timeElapsed = endTime - startTime;
-           // name = "";
-             
+   
         }    
        
         try {    
