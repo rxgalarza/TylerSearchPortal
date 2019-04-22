@@ -44,7 +44,7 @@ public class MainController implements Serializable {
     DecimalFormat twoDForm = new DecimalFormat("#.####");
      
     public List<Case> getSortedByDate() {
-       // try{
+        try{
         sortedByDate.clear();
         String [] dateParts = startDate.split("/");
         int monthStart = Integer.parseInt(dateParts[0]);
@@ -72,16 +72,17 @@ public class MainController implements Serializable {
                    }
                }
            }
-        //}
+        }
            
         }
-      //  catch(NullPointerException e)
-    // {
-      //  System.out.print("NullPointerException Caught At MainController");
-   //  }
+       catch(NullPointerException e)
+     {
+        System.out.print("NullPointerException Caught At MainController");
+    }
         
         return sortedByDate;
     }
+    
     
     
       public  List<Case> sortedByFiledDate = new ArrayList<Case>();
@@ -222,6 +223,7 @@ public class MainController implements Serializable {
         this.businessName = businessName;
     }
     public String showCase(String citationNumber){
+        if(list==null) return " ";
         for(int i = 0;i<list.size();i++){
             if(list.get(i).getCitationNumber().equals(citationNumber)){
                 Case = list.get(i);
@@ -230,6 +232,7 @@ public class MainController implements Serializable {
         return "detailPage.xhtml";
     }
     public String showCase2(String caseNumber){
+        if(list==null) return " ";
         for(int i = 0;i<list.size();i++){
             if(list.get(i).getCaseNbr().equals(caseNumber)){
                 Case = list.get(i);
