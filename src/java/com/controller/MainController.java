@@ -22,7 +22,6 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "main")
 @SessionScoped
 public class MainController implements Serializable {
-    private Case c = new Case();
     ListQuery query = new ListQuery();
     
     private List<Case> list = new ArrayList<Case>();
@@ -32,15 +31,15 @@ public class MainController implements Serializable {
     private String nameFirst = "";
     private String nameLast = "";
     private int curr = 0;
-    public  String Date = "";
-    public String startDate = "";
-    public String endDate = "";
-    public String citationNumber = "";
-    public String businessName = "";
+    private  String Date = "";
+    private String startDate = "";
+    private String endDate = "";
+    private String citationNumber = "";
+    private String businessName = "";
     private Case Case;
     private double seconds;
-    
-    public  List<Case> sortedByDate = new ArrayList<Case>();
+    private  List<Case> sortedByFiledDate = new ArrayList<Case>();
+    private  List<Case> sortedByDate = new ArrayList<Case>();
     DecimalFormat twoDForm = new DecimalFormat("#.####");
      
     public List<Case> getSortedByDate() {
@@ -85,7 +84,7 @@ public class MainController implements Serializable {
     
     
     
-      public  List<Case> sortedByFiledDate = new ArrayList<Case>();
+
 
     public List<Case> getSortedByFiledDate() {
        // try{
@@ -222,6 +221,12 @@ public class MainController implements Serializable {
     public void setBusinessName(String businessName) {
         this.businessName = businessName;
     }
+    public String showList(){
+        return "index.xhtml";
+    }
+    public String showBusinessList(){
+        return "businessIndex.xhtml";
+    }
     public String showCase(String citationNumber){
         if(list==null) return " ";
         for(int i = 0;i<list.size();i++){
@@ -242,7 +247,6 @@ public class MainController implements Serializable {
     }
     public String cleanAll(){
         if(list!=null) list.clear();        
-        c = null;
         error="";
         size = 0;
         name = "";
@@ -255,12 +259,13 @@ public class MainController implements Serializable {
         citationNumber = "";
         businessName = "";
         Case = null;
-        sortedByDate.clear();
-        
+        if(sortedByDate!=null)sortedByDate.clear();
+        if(sortedByFiledDate!=null)sortedByFiledDate.clear();       
         return "searchPage.xhtml";
     }
     public List<Case> getList() {
-     
+        //  try {  
+     if(list==null||list.size()==0){
        if (!nameFirst.equals("")&&!nameLast.equals("")){
            // list.clear();
            long startTime = System.nanoTime();      
@@ -277,13 +282,11 @@ public class MainController implements Serializable {
            }
                
             long endTime = System.nanoTime();
-            timeElapsed = endTime - startTime;
-
-            
+            timeElapsed = endTime - startTime;          
        }
        else if(!businessName.equals("") ){
            
-             nameFirst = "";
+           nameFirst = "";
            nameLast="";
            long startTime = System.nanoTime(); 
            if(businessName.indexOf("*")!=-1){
@@ -295,11 +298,9 @@ public class MainController implements Serializable {
               
             long endTime = System.nanoTime();
             timeElapsed = endTime - startTime;
-
        }
         else
-        {
-        
+        {        
             long startTime = System.nanoTime();
             if(name.indexOf("*")!=-1){
                 list = query.listCaseWildCard(name);
@@ -311,20 +312,19 @@ public class MainController implements Serializable {
             long endTime = System.nanoTime();    
             timeElapsed = endTime - startTime;
    
-        }    
-       
-        try {    
+        }          
         error="";
         size = list.size();
             if (list.isEmpty())//list == 0
             {
                 error="No results found";
             }
-        }
-        catch(NullPointerException e)
-        {
-            System.out.print("NullPointerException Caught At MainController");
-        }
+       // }
+        //catch(NullPointerException e)
+       // {
+        //    System.out.print("NullPointerException Caught At MainController");
+       // }
+     }
         return list;
        
     }

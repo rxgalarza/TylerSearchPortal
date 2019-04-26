@@ -33,7 +33,7 @@ and open the template in the editor.
                             <f:validateRegex pattern="[a-zA-Z]{0,}+[*]{0,}"/>  
                        
                     </h:inputText>
-                <h:commandButton value="Search" action="index.xhtml" />
+                <h:commandButton value="Search" action="#{main.showList}" />
                 </h:form>
             </div>
             <div class="tabPanel">
@@ -41,7 +41,7 @@ and open the template in the editor.
                     Business Name: <h:inputText maxlength="15" value="#{main.businessName}">
                      <f:validateRegex pattern="[a-zA-Z]{1,}+[0-9]{0,}+[*]{0,}"/>   
                     </h:inputText>
-                <h:commandButton value="Search" action="businessIndex.xhtml"  />
+                <h:commandButton value="Search" action="#{main.showBusinessList}"  />
                 </h:form>
             </div>
             <div class="tabPanel">
@@ -49,7 +49,7 @@ and open the template in the editor.
                 Citation Number: <h:inputText maxlength="15" value="#{main.name}">
                    <f:validateRegex pattern="[a-zA-Z]{1,}+[0-9]{0,}+[*]{0,}"  />  
                     </h:inputText>
-                <h:commandButton value="Search" action="index.xhtml" />
+                <h:commandButton value="Search" action="#{main.showList}" />
                 </h:form>
             </div>
             <div class="tabPanel">
@@ -57,7 +57,7 @@ and open the template in the editor.
                     Case Number: <h:inputText maxlength="15" value="#{main.name}">
                      <f:validateRegex pattern="[a-zA-Z]{1,}+[0-9]{0,}+[*]{0,}" />         
                     </h:inputText>
-               <h:commandButton value="Search" action="index.xhtml" />
+               <h:commandButton value="Search" action="#{main.showList}" />
                 </h:form>
             </div>
         </div>
