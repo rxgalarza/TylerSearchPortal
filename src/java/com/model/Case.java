@@ -22,6 +22,7 @@ public class Case implements Serializable{
     private String caseNbr;
     private int   index;
     private String filedDate;
+    private String caseNumber;
 
     
     
@@ -104,6 +105,14 @@ public class Case implements Serializable{
 
     public void setFiledDate(String filedDate) {
         this.filedDate = filedDate;
+    }
+
+    public String getCaseNumber() {
+        return caseNumber;
+    }
+
+    public void setCaseNumber(String caseNumber) {
+        this.caseNumber = caseNumber;
     }
     
     

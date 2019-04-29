@@ -23,7 +23,7 @@ public class ListQuery extends DBConnection implements Serializable {
         List<Case> list = new ArrayList<Case>();
 
         try {
-           ps = (PreparedStatement) connect().prepareStatement("select * from test1 where CitationNumber = '" + query + "'");
+           ps = (PreparedStatement) connect().prepareStatement("select * from test1 where CitationNumber = '" + query + "' limit 0, 1000 option max_matches=1000");
             
           Case c;
             rs = ps.executeQuery();
@@ -56,7 +56,7 @@ public class ListQuery extends DBConnection implements Serializable {
             //   ps = (PreparedStatement) connect().prepareStatement("select * from "
             //         + "test1 where NameFirst match ('"+ NameFirst + "') and NameLast match ('" + NameLast + "')");
 
-            ps = (PreparedStatement) connect().prepareStatement("select * from test1 where nameFirst= '" + nameFirst + "' and nameLast = '" + nameLast + "'");
+            ps = (PreparedStatement) connect().prepareStatement("select * from test1 where nameFirst= '" + nameFirst + "' and nameLast = '" + nameLast + "' limit 0, 1000 option max_matches=1000");
 
             //  ps = (PreparedStatement) connect().prepareStatement("select * from test1 where match('')");
             Case c;
@@ -90,7 +90,7 @@ public class ListQuery extends DBConnection implements Serializable {
             //   ps = (PreparedStatement) connect().prepareStatement("select * from "
             //         + "test1 where NameFirst match ('"+ NameFirst + "') and NameLast match ('" + NameLast + "')");
 
-            ps = (PreparedStatement) connect().prepareStatement("select * from test2 where nameLast = '" + businessName + "'");
+            ps = (PreparedStatement) connect().prepareStatement("select * from test2 where nameLast = '" + businessName + "' limit 0, 1000 option max_matches=1000");
 
             //  ps = (PreparedStatement) connect().prepareStatement("select * from test1 where match('')");
             Case c;
@@ -113,12 +113,52 @@ public class ListQuery extends DBConnection implements Serializable {
             return null;
         }
     }
+    
+    public List<Case> listCase4(String caseNumber) {
+        List<Case> list = new ArrayList<Case>();
 
-    public List<Case> listCaseWildCard(String query) {
+        try {
+            //   ps = (PreparedStatement) connect().prepareStatement("select * from "
+            //         + "test1 where NameFirst match ('"+ NameFirst + "') and NameLast match ('" + NameLast + "')");
+
+            ps = (PreparedStatement) connect().prepareStatement("select * from test3 where CaseNbr = '" + caseNumber + "' limit 0, 1000 option max_matches=1000");
+
+            //  ps = (PreparedStatement) connect().prepareStatement("select * from test1 where match('')");
+            Case c;
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                c = new Case();
+                c.setNameFirst(rs.getString("NameFirst"));
+                c.setNameLast(rs.getString("NameLast"));
+                c.setCaseNbr(rs.getString("CaseNbr"));
+                c.setCitationNumber(rs.getString("CitationNumber"));
+                list.add(c);
+            }
+            ps = null;
+            rs = null;
+            return list;
+
+        } catch (Exception e) {
+
+            return null;
+        }
+    }
+
+    public List<Case> listCaseWildCard(String query,int flag) {
+        
        List<Case> list = new ArrayList<Case>();
         
         try{
-            ps = (PreparedStatement) connect().prepareStatement("select * from test1 where match ('"+ query + "')");
+            if(flag==1){
+                 ps = (PreparedStatement) connect().prepareStatement("select * from test1  where match ('@nameLast "+ query + "') limit 0, 1000 option max_matches=1000");
+            }
+            else if(flag==0){
+                 ps = (PreparedStatement) connect().prepareStatement("select * from test1  where match ('@nameFirst "+ query + "') limit 0, 1000 option max_matches=1000");
+            }
+            else if(flag==2){
+                 ps = (PreparedStatement) connect().prepareStatement("select * from test1  where match ('@citationNumber "+ query + "') limit 0, 1000 option max_matches=1000");
+            }
             Case c;
             rs = ps.executeQuery();
             int i = 0;
@@ -131,6 +171,92 @@ public class ListQuery extends DBConnection implements Serializable {
                 c.setPartyID(rs.getString("PartyID"));
                 c.setTicketDate(rs.getString("ticketDate"));
                 c.setAppearByDate(rs.getString("AppearDate"));
+                c.setIndex(i);
+                i++;
+                list.add(c);
+            }
+            
+            return list;
+                   
+        }catch(Exception e){
+            
+            return null;
+        }
+    }
+    
+    
+    public List<Case> listCaseWildCardBusiness(String query) {
+       List<Case> list = new ArrayList<Case>();
+        System.out.println("LIST CASE WILD CARD BUSINESS");
+        try{
+            ps = (PreparedStatement) connect().prepareStatement("select * from test2 where match('@nameLast "+ query + "') limit 0, 1000 option max_matches=1000");
+            Case c;
+            rs = ps.executeQuery();
+            int i = 0;
+           
+            while(rs.next()){
+                c = new Case();
+                c.setNameLast(rs.getString("nameLast"));
+                c.setCaseNbr(rs.getString("CaseNbr"));
+                c.setFiledDate(rs.getString("FiledDate"));
+                c.setIndex(i);
+                i++;
+                list.add(c);
+            }
+            
+            return list;
+                   
+        }catch(Exception e){
+            
+            return null;
+        }
+    }
+    
+    
+    public List<Case> listCaseWildCardCitationNumber(String query) {
+       List<Case> list = new ArrayList<Case>();
+        System.out.println("LIST CASE WILD CARD BUSINESS");
+        try{
+            ps = (PreparedStatement) connect().prepareStatement("select * from test2 where match('@citationNumber "+ query + "') limit 0, 1000 option max_matches=1000");
+            Case c;
+            rs = ps.executeQuery();
+            int i = 0;
+           
+            while(rs.next()){
+                c = new Case();
+                c.setNameLast(rs.getString("nameLast"));
+                c.setCaseNbr(rs.getString("CaseNbr"));
+                c.setFiledDate(rs.getString("FiledDate"));
+                c.setIndex(i);
+                i++;
+                list.add(c);
+            }
+            
+            return list;
+                   
+        }catch(Exception e){
+            
+            return null;
+        }
+    }
+    
+    
+     public List<Case> listCaseWildCardCaseNumber(String query) {
+       List<Case> list = new ArrayList<Case>();
+       System.out.println("Case Number");
+        try{
+            ps = (PreparedStatement) connect().prepareStatement("select * from test3 where match('"+ query + "') limit 0, 1000 option max_matches=1000");
+            Case c;
+            rs = ps.executeQuery();
+            int i = 0;
+           
+            while(rs.next()){
+                c = new Case();
+                c.setNameLast(rs.getString("nameLast"));
+                c.setNameFirst(rs.getString("nameFirst"));
+                c.setCaseNbr(rs.getString("CaseNbr"));
+                c.setCitationNumber(rs.getString("CitationNumber"));
+                //c.setFiledDate(rs.getString("FiledDate"));
                 c.setIndex(i);
                 i++;
                 list.add(c);

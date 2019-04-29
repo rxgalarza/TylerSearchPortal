@@ -15,6 +15,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css.css"></link>
     </h:head>
     <h:body style="padding: 20px">
+        
         <h:graphicImage class="logo" library="images" name="logo.jpg" />
         <div class="tabContainer">
             <div class="buttonContainer">
@@ -47,17 +48,17 @@ and open the template in the editor.
             <div class="tabPanel">
                 <h:form>
                 Citation Number: <h:inputText maxlength="15" value="#{main.name}">
-                   <f:validateRegex pattern="[a-zA-Z]{1,}+[0-9]{0,}+[*]{0,}"  />  
+                    
                     </h:inputText>
                 <h:commandButton value="Search" action="#{main.showList}" />
                 </h:form>
             </div>
             <div class="tabPanel">
                 <h:form>
-                    Case Number: <h:inputText maxlength="15" value="#{main.name}">
+                    Case Number: <h:inputText maxlength="15" value="#{main.caseNumber}">
                      <f:validateRegex pattern="[a-zA-Z]{1,}+[0-9]{0,}+[*]{0,}" />         
                     </h:inputText>
-               <h:commandButton value="Search" action="#{main.showList}" />
+               <h:commandButton value="Search" action="#{main.showCaseNumberList}" />
                 </h:form>
             </div>
         </div>

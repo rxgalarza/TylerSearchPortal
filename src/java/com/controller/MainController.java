@@ -6,7 +6,6 @@
 package com.controller;
 import com.database.ListQuery;
 import com.model.Case;
-
 import java.io.Serializable;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -36,6 +35,7 @@ public class MainController implements Serializable {
     private String endDate = "";
     private String citationNumber = "";
     private String businessName = "";
+    private String caseNumber = "";
     private Case Case;
     private double seconds;
     private  List<Case> sortedByFiledDate = new ArrayList<Case>();
@@ -227,6 +227,20 @@ public class MainController implements Serializable {
     public String showBusinessList(){
         return "businessIndex.xhtml";
     }
+    
+    public String showCaseNumberList(){
+        return "caseNumberIndex.xhtml";
+    }
+
+    public String getCaseNumber() {
+        return caseNumber;
+    }
+
+    public void setCaseNumber(String caseNumber) {
+        this.caseNumber = caseNumber;
+    }
+    
+    
     public String showCase(String citationNumber){
         if(list==null) return " ";
         for(int i = 0;i<list.size();i++){
@@ -271,10 +285,10 @@ public class MainController implements Serializable {
            long startTime = System.nanoTime();      
            if(nameLast.indexOf("*")!=-1){
                 
-                list = query.listCaseWildCard(nameFirst);
+                list = query.listCaseWildCard(nameFirst,0);
             }
            else if(nameFirst.indexOf("*")!=-1){
-               list = query.listCaseWildCard(nameLast);
+               list = query.listCaseWildCard(nameLast,1);
            }
          
            else{
@@ -290,10 +304,24 @@ public class MainController implements Serializable {
            nameLast="";
            long startTime = System.nanoTime(); 
            if(businessName.indexOf("*")!=-1){
-                list = query.listCaseWildCard(businessName);
-            }
+                list = query.listCaseWildCardBusiness(businessName);
+                System.out.println("IF");
+           }
            else{
                list = query.listCase3(businessName);  
+           }
+              
+            long endTime = System.nanoTime();
+            timeElapsed = endTime - startTime;
+       }else if (!caseNumber.equals("")){
+           
+           long startTime = System.nanoTime(); 
+           if(caseNumber.indexOf("*")!=-1){
+                list = query.listCaseWildCardCaseNumber(caseNumber);
+                System.out.println("IF");
+           }
+           else{
+               list = query.listCase4(caseNumber);  
            }
               
             long endTime = System.nanoTime();
@@ -303,7 +331,7 @@ public class MainController implements Serializable {
         {        
             long startTime = System.nanoTime();
             if(name.indexOf("*")!=-1){
-                list = query.listCaseWildCard(name);
+                list = query.listCaseWildCard(name,2);
             }
             else{
                 list = query.listCase(name);
@@ -358,6 +386,4 @@ public class MainController implements Serializable {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
-
-    
 }

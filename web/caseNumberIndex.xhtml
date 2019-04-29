@@ -9,8 +9,7 @@
          .content{
                  color:#1f3877;
                  text-align: center;
-                 font-family: sans-serif;
-                
+                font-family: sans-serif;
                 }
          table.cases{
              margin:auto;
@@ -28,46 +27,45 @@
                               
                 <h:form>
                     <h:dataTable styleClass="cases" value="#{main.list}" var="c">
+                    
                     <h:column>
                       <f:facet name="header">
                         <h:outputText value="First Name"/>
                       </f:facet>
                       <h:outputText value="#{c.nameFirst}"/>
                     </h:column>
+                    
                     <h:column>
                       <f:facet name="header">
                         <h:outputText value="Last Name"/>
                       </f:facet>
                       <h:outputText value="#{c.nameLast}"/>
                     </h:column>
-                    
-                    <h:column>
+                        
+                        <h:column>
+                      <f:facet name="header">
+                        <h:outputText value="Case Number"/>
+                      </f:facet>
+                      <h:outputText value="#{c.caseNbr}"/>
+                    </h:column> 
+                        
+                        
+                          <h:column>
                       <f:facet name="header">
                         <h:outputText value="Citation Number"/>
                       </f:facet>
                       <h:outputText value="#{c.citationNumber}"/>
-                    </h:column>
-                    <h:column>
-                      <f:facet name="header">
-                        <h:outputText value="Ticket Date"/>
-                      </f:facet>
-                      <h:outputText value="#{c.ticketDate}"/>
-                    </h:column>
-                        <h:column>
-                      <f:facet name="header">
-                        <h:outputText value="Appear By Date"/>
-                      </f:facet>
-                      <h:outputText value="#{c.appearByDate}"/>
-                    </h:column>
+                    </h:column> 
+                        
                     <h:column>
                       <h:commandButton value="More"                                  
-                                     action="#{main.showCase(c.citationNumber)}"/> 
+                                     action="#{main.showCase2(c.caseNbr)}"/> 
                     </h:column>
                     </h:dataTable>
                     <h1 style="color:red"> #{main.error} </h1>
                     <h3> Number of matches:  #{main.size} </h3>
                    
-                    <h3> #{main.seconds} seconds</h3>
+                    <h3> #{main.seconds} seconds </h3>
                     
                     
                     <h:commandButton value="Back"                                  
@@ -80,7 +78,7 @@
                     </h:inputText>
                      End Date: <h:inputText maxlength="15" value="#{main.endDate}">
                     </h:inputText>
-                    <h:commandButton value="Search" action= "postSearchIndex.xhtml" />
+                    <h:commandButton value="Search" action= "CaseNumberPostSearchIndex.xhtml" />
                 </h:form>
             </f:view>
         </div>
