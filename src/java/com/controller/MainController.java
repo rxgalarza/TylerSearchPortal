@@ -318,7 +318,7 @@ public class MainController implements Serializable {
            long startTime = System.nanoTime(); 
            if(caseNumber.indexOf("*")!=-1){
                 list = query.listCaseWildCardCaseNumber(caseNumber);
-                System.out.println("IF");
+                
            }
            else{
                list = query.listCase4(caseNumber);  
