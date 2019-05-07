@@ -40,7 +40,7 @@ and open the template in the editor.
             <div class="tabPanel">
                 <h:form>
                     Business Name: <h:inputText maxlength="15" value="#{main.businessName}">
-                     <f:validateRegex pattern="[a-zA-Z]{1,}+[0-9]{0,}+[*]{0,}"/>   
+                      <!--<f:validateRegex pattern="[a-zA-Z]{1,}+[0-9]{0,}+[*]{0,}"/> -->  
                     </h:inputText>
                 <h:commandButton value="Search" action="#{main.showBusinessList}"  />
                 </h:form>
@@ -56,7 +56,7 @@ and open the template in the editor.
             <div class="tabPanel">
                 <h:form>
                     Case Number: <h:inputText maxlength="15" value="#{main.caseNumber}">
-                     <f:validateRegex pattern="[a-zA-Z]{1,}+[0-9]{0,}+[*]{0,}" />         
+                     <!--<f:validateRegex pattern="[a-zA-Z]{1,}+[0-9]{0,}+[*]{0,}" />  -->       
                     </h:inputText>
                <h:commandButton value="Search" action="#{main.showCaseNumberList}" />
                 </h:form>

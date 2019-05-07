@@ -259,6 +259,17 @@ public class MainController implements Serializable {
         }
         return "BusinessDetailPage.xhtml";
     }
+    
+    
+    public String showCase3(String caseNumber){
+        if(list==null) return " ";
+        for(int i = 0;i<list.size();i++){
+            if(list.get(i).getCaseNbr().equals(caseNumber)){
+                Case = list.get(i);
+            }
+        }
+        return "CaseNumberDetailPage.xhtml";
+    }
     public String cleanAll(){
         if(list!=null) list.clear();        
         error="";
@@ -285,10 +296,10 @@ public class MainController implements Serializable {
            long startTime = System.nanoTime();      
            if(nameLast.indexOf("*")!=-1){
                 
-                list = query.listCaseWildCard(nameFirst,0);
+                list = query.listCaseWildCard(nameFirst,0, nameLast);
             }
            else if(nameFirst.indexOf("*")!=-1){
-               list = query.listCaseWildCard(nameLast,1);
+               list = query.listCaseWildCard(nameLast,1, nameFirst);
            }
          
            else{
@@ -331,7 +342,7 @@ public class MainController implements Serializable {
         {        
             long startTime = System.nanoTime();
             if(name.indexOf("*")!=-1){
-                list = query.listCaseWildCard(name,2);
+                list = query.listCaseWildCard(name,2, "");
             }
             else{
                 list = query.listCase(name);

@@ -23,7 +23,13 @@ public class Case implements Serializable{
     private int   index;
     private String filedDate;
     private String caseNumber;
-
+    private String city;
+    private String state;
+    private String zip;
+    private String road;
+    private String VehicleLicenseNumber;
+    private String licenseNumber;
+    
     
     
     
@@ -114,6 +120,55 @@ public class Case implements Serializable{
     public void setCaseNumber(String caseNumber) {
         this.caseNumber = caseNumber;
     }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getRoad() {
+        return road;
+    }
+
+    public void setRoad(String road) {
+        this.road = road;
+    }
+
+    public String getVehicleLicenseNumber() {
+        return VehicleLicenseNumber;
+    }
+
+    public void setVehicleLicenseNumber(String VehicleLicenseNumber) {
+        this.VehicleLicenseNumber = VehicleLicenseNumber;
+    }
+
+    public String getLicenseNumber() {
+        return licenseNumber;
+    }
+
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
+    }
+    
     
     
 }

@@ -37,6 +37,12 @@ public class ListQuery extends DBConnection implements Serializable {
                 c.setPartyID(rs.getString("PartyID"));
                 c.setTicketDate(rs.getString("ticketDate"));
                 c.setAppearByDate(rs.getString("AppearDate"));
+                c.setCity(rs.getString("City"));
+                c.setState(rs.getString("State"));
+                c.setZip(rs.getString("Zip"));
+                c.setRoad(rs.getString("Road"));
+                c.setVehicleLicenseNumber(rs.getString("VehicleLicenseNumber"));
+                System.out.println(c.getCity());
                 c.setIndex(i);
                 i++;
                 list.add(c);
@@ -70,6 +76,11 @@ public class ListQuery extends DBConnection implements Serializable {
                 c.setPartyID(rs.getString("PartyID"));
                 c.setTicketDate(rs.getString("ticketDate"));
                 c.setAppearByDate(rs.getString("appearDate"));
+                c.setCity(rs.getString("City"));
+                c.setState(rs.getString("State"));
+                c.setZip(rs.getString("Zip"));
+                c.setRoad(rs.getString("Road"));
+                c.setLicenseNumber(rs.getString("VehicleLicenseNumber"));
                 list.add(c);
             }
             ps = null;
@@ -145,16 +156,17 @@ public class ListQuery extends DBConnection implements Serializable {
         }
     }
 
-    public List<Case> listCaseWildCard(String query,int flag) {
+    public List<Case> listCaseWildCard(String query,int flag, String query2) {
         
        List<Case> list = new ArrayList<Case>();
         
         try{
             if(flag==1){
-                 ps = (PreparedStatement) connect().prepareStatement("select * from test1  where match ('@nameLast "+ query + "') limit 0, 1000 option max_matches=1000");
+                 ps = (PreparedStatement) connect().prepareStatement("select * from test1  where match ('@nameFirst "+ query2 + "') and nameLast = '" + query + "' limit 0, 1000 option max_matches=1000");
+                 
             }
             else if(flag==0){
-                 ps = (PreparedStatement) connect().prepareStatement("select * from test1  where match ('@nameFirst "+ query + "') limit 0, 1000 option max_matches=1000");
+                 ps = (PreparedStatement) connect().prepareStatement("select * from test1  where match ('@nameLast "+ query2 + "') and nameFirst = '" + query + "' limit 0, 1000 option max_matches=1000");
             }
             else if(flag==2){
                  ps = (PreparedStatement) connect().prepareStatement("select * from test1  where match ('@citationNumber "+ query + "') limit 0, 1000 option max_matches=1000");
@@ -171,6 +183,7 @@ public class ListQuery extends DBConnection implements Serializable {
                 c.setPartyID(rs.getString("PartyID"));
                 c.setTicketDate(rs.getString("ticketDate"));
                 c.setAppearByDate(rs.getString("AppearDate"));
+                
                 c.setIndex(i);
                 i++;
                 list.add(c);
