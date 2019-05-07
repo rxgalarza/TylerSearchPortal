@@ -41,7 +41,7 @@ public class MainController implements Serializable {
     private  List<Case> sortedByFiledDate = new ArrayList<Case>();
     private  List<Case> sortedByDate = new ArrayList<Case>();
     DecimalFormat twoDForm = new DecimalFormat("#.####");
-     
+     private String TEST;
     public List<Case> getSortedByDate() {
         try{
         sortedByDate.clear();
